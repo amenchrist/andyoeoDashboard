@@ -39,7 +39,7 @@ const Navbar = () => {
     <div className='flex justify-between p-2 md:mx-6 relative'>
       <NavButton title='Menu' customFunc={ () => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} color='blue' icon={<AiOutlineMenu />} />
       <div className='flex'>
-      <NavButton title='Notifications' customFunc={ () => handleClick('notification')} color='blue' icon={<RiNotification3Line />} />
+      <NavButton title='Notifications' customFunc={ () => handleClick('notification')} color='blue' dotColor='#03C9D7' icon={<RiNotification3Line />} />
       <TooltipComponent content='Profile' position='BottomCenter' >
         <div className='flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg' onClick={ () => handleClick('userProfile')} >
           <img src={avatar} alt='User Avatar' className='rounded-full w-8 h-8' />

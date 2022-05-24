@@ -4,7 +4,7 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
-import { ECommerce, Orders, Employees, Customers } from './pages';
+import { Overview, Orders, Employees, Customers } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
@@ -36,18 +36,18 @@ const App = () => {
               <div className='fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full'>
                 <Navbar />
               </div>
-          </div>
-          <div>
-            <Routes>
-              {/* Dashboard */}
-              <Route path='/' element={<ECommerce />} />
+            <div>
+              <Routes>
+                {/* Dashboard */}
+                <Route path='/' element={<Overview />} />
 
-              {/* Pages */}
-              <Route path='/customers' element={<Customers />} />
-              <Route path='/employees' element={<Employees />} />
-              <Route path='/orders' element={<Orders />} />
+                {/* Pages */}
+                <Route path='/customers' element={<Customers />} />
+                <Route path='/employees' element={<Employees />} />
+                <Route path='/orders' element={<Orders />} />
 
-            </Routes>
+              </Routes>
+            </div>
           </div>
         </div>
       </BrowserRouter>
