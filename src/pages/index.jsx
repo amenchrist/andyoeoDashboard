@@ -1,6 +1,6 @@
 export { default as Overview } from './Overview';
-export { default as Customers } from './Customers';
-export { default as Orders } from './Orders';
+export { default as Students } from './Students';
+export { default as Applications } from './Applications';
 export { default as Employees } from './Employees';
 // export { default as Kanban } from './Kanban';
 // export { default as Editor } from './Editor';
