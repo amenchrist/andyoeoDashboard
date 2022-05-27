@@ -64,7 +64,14 @@ const customerGridImage = (props) => (
   ];
 
 export const studentsGrid = [
-  {
+  { 
+    field: 'id', 
+    headerText: 'id', 
+    width: '150', 
+    textAlign: 'Center',
+    isPrimaryKey: true, 
+    },
+    {
     field: 'title',
     headerText: 'Title',
     width: '150',
@@ -315,14 +322,7 @@ export const studentsGrid = [
     headerText: 'nokEmail',
     width: '150',
     textAlign: 'Center'
-  },
-  { 
-    field: 'id', 
-    headerText: 'id', 
-    width: '150', 
-    textAlign: 'Center',
-    isPrimaryKey: true, 
-    }
+  }
 ]
 
 
