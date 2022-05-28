@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import StickyHeadTable from '../components/table';
 import TextField from '@mui/material/TextField';
+import { useStateContext } from '../contexts/ContextProvider';
 
 const AllApplications = () => {
 
   const [ searchQuery , setSearchQuery ] = useState('');
   const [ tableData, setTableData ] = useState([]);
   const [ initialTableData, setInitialTableData ] = useState([]);
+
+  const { newApp, setNewApp } = useStateContext();
+  
 
     useEffect(()=>{
         fetch('http://localhost:7000/applications')
@@ -45,7 +49,10 @@ const AllApplications = () => {
         <div className='pb2'>
             <TextField value={searchQuery} onChange={handleSearch} placeholder='Search Applicants'/>
         </div>
-        <div className='tc'>
+        <div className=''>
+          <div className='pb1'>
+            {!newApp ? <button className='pa1' onClick={() =>setNewApp(true) }>New Application</button> : ''}
+          </div>
             <StickyHeadTable data={tableData} />
         </div>
     </div>

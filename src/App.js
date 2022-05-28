@@ -19,20 +19,17 @@ import AllApplications from './pages/AllApplications';
 
 const App = () => {
 
-  const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
-
-  const [ newApp, setNewApp ] = useState(false);
-
+  const { newApp, setNewApp } = useStateContext();
 
 
   const nav = 
   <div className='flex pt2 justify-between'>
-    <div className='flex fw7 f3 bold items-center'>
-      <IoSchool /><span className='pl2'>Andyoeo</span>
+    <div className='flex fw7 f3 bold items-center' >
+      <a href='/' className='black no-underline'>
+        <IoSchool /><span className='pl2'>Andyoeo</span>
+      </a>
     </div>
-    <div className='flex'>
-      {!newApp ? <button className='pa1' onClick={() =>setNewApp(true) }>New Application</button> : ''}
-    
+    <div className='flex'>    
       <button className='pa1 ' onClick={()=> setNewApp(false)}>Home</button>
       <button className='pa1'>Profile</button>
       <button className='pa1'>Logout</button>

@@ -1,11 +1,17 @@
 import React, {useState} from 'react';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DirectionStack from '../components/Stack';
 import Button from '@mui/material/Button';
-import { inputs } from '../components/tableInputs';
+import { useStateContext } from '../contexts/ContextProvider';
+import { courseInfoInputs } from '../components/courseInfoInputs';
+import { personalInfoInputs } from '../components/personalInfoInputs';
+import { documentsInputs } from '../components/documentsInputs';
+import { personalStatementInputs } from '../components/personalStatementInputs';
+import { submitAppInputs } from '../components/submitAppInputs';
 
 export default function ApplicationForm() {
+
+  const {  onCourseDetails, onPersonalInfo, onStatement, onDocuments, onSubmitApp } = useStateContext()
 
   const [ agent, setAgent ] = useState('');
   const [ id, setId ] = useState('');
@@ -20,8 +26,8 @@ export default function ApplicationForm() {
   const [ interview, setInterview ] = useState('');
   const [ elpt, setElpt ] = useState('');
   
-  const stateVars = {agent, applicant, deliveryPattern, intake, submittedOn, status, offer, registrationEmail, enrolmentStatus, interview, elpt}
-  const stateFuncs = {setAgent, setApplicant, setDeliveryPattern, setIntake, setSubmittedOn, setStatus, setOffer, setRegistrationEmail, setEnrolmentStatus, setInterview, setElpt }
+  const stateVars = {id, agent, applicant, deliveryPattern, intake, submittedOn, status, offer, registrationEmail, enrolmentStatus, interview, elpt}
+  const stateFuncs = {setId, setAgent, setApplicant, setDeliveryPattern, setIntake, setSubmittedOn, setStatus, setOffer, setRegistrationEmail, setEnrolmentStatus, setInterview, setElpt }
 
   function handleSubmit(e){
     e.preventDefault();
@@ -38,6 +44,32 @@ export default function ApplicationForm() {
     .then(res => res.json())
     .then(res => console.log(res));
   }
+
+  let inputs = []
+  switch(true){
+    case onCourseDetails:
+      inputs = courseInfoInputs;
+      console.log("course: ",onCourseDetails )
+    break;
+    case onPersonalInfo:
+      inputs = personalInfoInputs;
+      console.log("personal: ",onPersonalInfo )
+    break;
+    case onStatement:
+      inputs = personalStatementInputs;
+      console.log("personal: ",onPersonalInfo )
+    break;
+    case onDocuments:
+      inputs = documentsInputs;
+      console.log("personal: ",onPersonalInfo )
+    break;
+    case onSubmitApp:
+      inputs = courseInfoInputs.concat(personalInfoInputs, personalStatementInputs, documentsInputs);
+      console.log("personal: ",onPersonalInfo )
+    break;
+    default:
+      inputs = courseInfoInputs;
+  }
   
   return (
       <div className='pt5 pb5' >
@@ -53,7 +85,7 @@ export default function ApplicationForm() {
                     <p>{input.label}</p>
                   </div>
                   <div className='flex items-center'>
-                    <TextField key={input.label} variant='outlined' value={stateVars[input.field]} onChange={e => stateFuncs[input.setFunction](e.target.value)} />
+                    <TextField  variant='outlined' value={stateVars[input.field]} onChange={e => stateFuncs[input.setFunction](e.target.value)} />
                   </div>
                 </div>
               )
