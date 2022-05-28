@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { FiSettings } from 'react-icons/fi';
-import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import { FiSettings } from 'react-icons/fi';
+// import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import 'tachyons';
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
-import { Overview, Applications, Employees, Students } from './pages';
+// import { Navbar, Footer, Sidebar, ThemeSettings } from './unsused/index-forComponents';
+// import { Overview, Applications, Employees, Students } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
 import SimpleContainer from './components/Container';
 
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
+// import CssBaseline from '@mui/material/CssBaseline';
+// import Container from '@mui/material/Container';
 
 import { IoSchool } from 'react-icons/io5';
 import ApplicationForm from './pages/NewApplication';
@@ -21,7 +21,7 @@ const App = () => {
 
   const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
 
-  const [ newApp, setNewApp ] = useState('');
+  const [ newApp, setNewApp ] = useState(false);
 
 
 
@@ -31,8 +31,9 @@ const App = () => {
       <IoSchool /><span className='pl2'>Andyoeo</span>
     </div>
     <div className='flex'>
-    <button className='pa1' onClick={() => newApp ? setNewApp(!newApp) : setNewApp(!newApp) }>New Application</button>
-      <button className='pa1 '>Home</button>
+      {!newApp ? <button className='pa1' onClick={() =>setNewApp(true) }>New Application</button> : ''}
+    
+      <button className='pa1 ' onClick={()=> setNewApp(false)}>Home</button>
       <button className='pa1'>Profile</button>
       <button className='pa1'>Logout</button>
     </div>
@@ -51,7 +52,7 @@ const App = () => {
     )
   } else {
     return (
-      <div  className='ba b-black'>
+      <div >
         <SimpleContainer>
           {nav}
           <div>

@@ -15,11 +15,11 @@ export default function DirectionStack() {
   return (
     <div>
       <Stack direction="row" spacing={2}>
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
-        <Item>Item 4</Item>
-        <Item>Item 5</Item>
+        <Item>Course Details</Item>
+        <Item>Personal Info</Item>
+        <Item>Statement</Item>
+        <Item>Documents</Item>
+        <Item>Submit Application</Item>
       </Stack>
     </div>
   );
