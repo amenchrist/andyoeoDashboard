@@ -8,6 +8,7 @@ import { personalInfoInputs } from '../components/applicationInputs/personalInfo
 import { documentsInputs } from '../components/applicationInputs/documentsInputs';
 import { personalStatementInputs } from '../components/applicationInputs/personalStatementInputs';
 import { v4 as uuidv4 } from 'uuid';
+import { submitAppInputs } from '../components/applicationInputs/submitAppInputs';
 //import SendIcon from '@mui/icons-material/Send';
 
 export default function ApplicationForm() {
@@ -119,7 +120,7 @@ export default function ApplicationForm() {
     .then(res => res.json())
     .then(res => console.log(res));
 
-    Object.entries(stateFuncs).forEach(func => func[1](''));
+    //Object.entries(stateFuncs).forEach(func => func[1](''));
       
   }
 
@@ -142,7 +143,7 @@ export default function ApplicationForm() {
       section = 'Documents';
     break;
     case onSubmitApp:
-      inputs = courseInfoInputs.concat(personalInfoInputs, personalStatementInputs, documentsInputs);
+      inputs = submitAppInputs;
       section = 'Submit Application';
     break;
     default:
@@ -185,7 +186,7 @@ export default function ApplicationForm() {
                  }
               })}
               <div className='flex justify-center pt2'>
-                <Button variant='contained' type='submit'>SUBMIT</Button>
+                <Button variant='contained' type='submit' size='large'>SAVE</Button>
               </div>
             </form>
           </div>
