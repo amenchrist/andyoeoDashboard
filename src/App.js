@@ -8,49 +8,65 @@ import ApplicationForm from './pages/ApplicationForm';
 import AllApplications from './pages/AllApplications';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import LoginButton from './components/LoginButton';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const App = () => {
 
+  const { logout, isAuthenticated } = useAuth0();
+
   const { newApp, setNewApp } = useStateContext();
 
-
-  const nav = 
-  <div className='flex pt2 justify-between'>
-    <div className='flex fw7 f3 bold items-center' >
-      <a href='/' className='black no-underline'>
-        <IoSchool /><span className='pl2'>Andyoeo</span>
-      </a>
+  const splashScreen = <div className='flex flex-column items-center justify-center' style={{height: "100vh"}}>
+    <img src='https://andyoeo.com/wp-content/uploads/2020/09/Andyoeo-logo-Desaturated.png' alt='Andyoeo Logo' style={{width: '120px'}}/>
+    <div className='pa5'>
+      <LoginButton />
     </div>
-    <Stack direction="row" spacing={2}>
-      <Button sx={{color: 'black'}} onClick={()=> setNewApp(false)}>Home</Button>
-      <Button sx={{color: 'black'}}>Profile</Button>
-      <Button sx={{color: 'black'}}>Logout</Button>
-    </Stack>
-  </div>;
+  </div>
 
-  if (newApp){
-    return (
-      <div >
-        <SimpleContainer>
-          {nav}
-          <div>
-            <ApplicationForm />
-          </div>
-        </SimpleContainer>
-      </div>
-    )
+  if (!isAuthenticated){
+    return splashScreen
   } else {
-    return (
-      <div >
-        <SimpleContainer>
-          {nav}
-          <div>
-            <AllApplications />
-          </div>
-        </SimpleContainer>
+    const nav = 
+    <div className='flex pt2 justify-between'>
+      <div className='flex fw7 f3 bold items-center' >
+        <a href='/' className='black no-underline'>
+          <IoSchool /><span className='pl2'>Andyoeo</span>
+        </a>
       </div>
-    )
+      <Stack direction="row" spacing={2}>
+        <Button sx={{color: 'black'}} onClick={()=> setNewApp(false)}>Home</Button>
+        <Button sx={{color: 'black'}}>Profile</Button>
+        <Button sx={{color: 'black'}} onClick={() => logout()}>Logout</Button>
+      </Stack>
+    </div>;
+  
+    if (newApp){
+      return (
+        <div >
+          <SimpleContainer>
+            {nav}
+            <div>
+              <ApplicationForm />
+            </div>
+          </SimpleContainer>
+        </div>
+      )
+    } else {
+      return (
+        <div >
+          <SimpleContainer>
+            {nav}
+            <div>
+              <AllApplications />
+            </div>
+          </SimpleContainer>
+        </div>
+      )
+    }
   }
+
+  
   
 }
 
