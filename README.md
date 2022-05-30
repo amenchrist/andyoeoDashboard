@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Andyoeo Dashboard 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A university applications' management system built to submit and track the status of student applications. 
+
+Stack: Mongo, Express, React, NodeJS
+
+Server Repo: 
+https://github.com/amenchrist/andyoeoServer
 
 ## Available Scripts
 
