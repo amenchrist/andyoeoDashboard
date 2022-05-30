@@ -8,6 +8,7 @@ const initialState = {
 };
 
 export const ContextProvider = ({ children }) => {
+
   const [screenSize, setScreenSize] = useState(undefined);
   const [currentColor, setCurrentColor] = useState('#03C9D7');
   const [currentMode, setCurrentMode] = useState('Dark');
@@ -20,6 +21,11 @@ export const ContextProvider = ({ children }) => {
   const [ onDocuments, setOnDocuments ] = useState(false);
   const [ onSubmitApp, setOnSubmitApp ] = useState(false);
   const [ newApp, setNewApp ] = useState(false);
+  const [ tableData, setTableData ] = useState([]);
+  const [ activeApp, setActiveApp ] = useState('');
+  const [ application, setApplication ] = useState({});
+
+  
 
   const setMode = (e) => {
     setCurrentMode(e.target.value);
@@ -47,7 +53,11 @@ export const ContextProvider = ({ children }) => {
     setOnDocuments,
     setOnSubmitApp,
     newApp, 
-    setNewApp
+    setNewApp,
+    tableData,
+    setTableData,
+    activeApp,
+    setActiveApp, application, setApplication
   }
 
   //currentColor, currentMode, activeMenu, screenSize, setScreenSize, handleClick, isClicked, initialState, setIsClicked, setActiveMenu, setCurrentColor, setCurrentMode, setMode, setColor, themeSettings, setThemeSettings

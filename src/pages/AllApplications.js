@@ -2,30 +2,29 @@ import React, { useState, useEffect } from 'react';
 import StickyHeadTable from '../components/table';
 import TextField from '@mui/material/TextField';
 import { useStateContext } from '../contexts/ContextProvider';
+import Button from '@mui/material/Button';
 
 const AllApplications = () => {
 
-  const [ searchQuery , setSearchQuery ] = useState('');
-  const [ tableData, setTableData ] = useState([]);
-  const [ initialTableData, setInitialTableData ] = useState([]);
-
-  const { newApp, setNewApp } = useStateContext();
+  const { newApp, setNewApp, tableData, setTableData } = useStateContext();
   
+  const [ searchQuery , setSearchQuery ] = useState('');
+  const [ filteredData, setFilteredData ] = useState([]);
 
-    useEffect(()=>{
-        fetch('http://localhost:7000/applications')
-        .then(res => res.json())
-        .then(data => {
-          //console.log(data);
-          setTableData(data);
-          setInitialTableData(data);})
-          
-        try{
-        }catch {
-            console.log('Problem fetching Data');
-        }
-    }, [])
-    
+
+  useEffect(()=>{
+    fetch('http://localhost:7000/applications')
+    .then(res => res.json())
+    .then(data => {
+      //console.log(data);
+      setTableData(data);
+      setFilteredData(data);})
+      
+    try{
+    }catch {
+        console.log('Problem fetching Data');
+    }
+  }, [])
   
 
   function handleSearch (e) {
@@ -33,12 +32,12 @@ const AllApplications = () => {
     let query = e.target.value.trim();
     if(query !== ''){
       const reg = new RegExp(query, 'i')
-      const results = initialTableData.filter(data =>{
+      const results = tableData.filter(data =>{
         return data.applicant.match(reg);
       })
-      setTableData(results);
+      setFilteredData(results);
     } else {
-      setTableData(initialTableData);
+      setFilteredData(tableData);
     }
   }
 
@@ -46,14 +45,14 @@ const AllApplications = () => {
 
   return (
     <div  className='pt5 pb5'>
-        <div className='pb2'>
+        <div className='pb2 flex justify-between'>
             <TextField value={searchQuery} onChange={handleSearch} placeholder='Search Applicants'/>
+            {!newApp ? <Button variant='contained' type='submit'onClick={() =>setNewApp(true) } size='medium'>New Application</Button> : ''}
         </div>
         <div className=''>
           <div className='pb1'>
-            {!newApp ? <button className='pa1' onClick={() =>setNewApp(true) }>New Application</button> : ''}
           </div>
-            <StickyHeadTable data={tableData} />
+            <StickyHeadTable data={filteredData} />
         </div>
     </div>
   )

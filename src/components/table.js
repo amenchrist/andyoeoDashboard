@@ -7,10 +7,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { useStateContext } from '../contexts/ContextProvider';
+
 
 import { columns } from './tableColumns';
 
 export default function StickyHeadTable({data}) {
+  const { newApp, setNewApp, activeApp, setActiveApp, setApplication, tableData } = useStateContext();
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -23,6 +26,12 @@ export default function StickyHeadTable({data}) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  function loadApp(id){
+    setApplication(tableData.filter(app => app.id === id)[0]);
+    setActiveApp(id);
+    setNewApp(true);
+  }
 
   const rows = data;
 
@@ -48,7 +57,7 @@ export default function StickyHeadTable({data}) {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={()=> loadApp(row.id)}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (

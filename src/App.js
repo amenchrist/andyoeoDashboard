@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from 'react';
-// import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import { FiSettings } from 'react-icons/fi';
-// import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import 'tachyons';
-// import { Navbar, Footer, Sidebar, ThemeSettings } from './unsused/index-forComponents';
-// import { Overview, Applications, Employees, Students } from './pages';
 import './App.css';
-
 import { useStateContext } from './contexts/ContextProvider';
 import SimpleContainer from './components/Container';
-
-// import CssBaseline from '@mui/material/CssBaseline';
-// import Container from '@mui/material/Container';
-
 import { IoSchool } from 'react-icons/io5';
-import ApplicationForm from './pages/NewApplication';
+import ApplicationForm from './pages/ApplicationForm';
 import AllApplications from './pages/AllApplications';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const App = () => {
 
@@ -29,16 +21,16 @@ const App = () => {
         <IoSchool /><span className='pl2'>Andyoeo</span>
       </a>
     </div>
-    <div className='flex'>    
-      <button className='pa1 ' onClick={()=> setNewApp(false)}>Home</button>
-      <button className='pa1'>Profile</button>
-      <button className='pa1'>Logout</button>
-    </div>
+    <Stack direction="row" spacing={2}>
+      <Button sx={{color: 'black'}} onClick={()=> setNewApp(false)}>Home</Button>
+      <Button sx={{color: 'black'}}>Profile</Button>
+      <Button sx={{color: 'black'}}>Logout</Button>
+    </Stack>
   </div>;
 
   if (newApp){
     return (
-      <div>
+      <div >
         <SimpleContainer>
           {nav}
           <div>
