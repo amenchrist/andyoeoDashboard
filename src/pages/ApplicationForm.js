@@ -9,6 +9,7 @@ import { documentsInputs } from '../components/applicationInputs/documentsInputs
 import { personalStatementInputs } from '../components/applicationInputs/personalStatementInputs';
 import { v4 as uuidv4 } from 'uuid';
 import { submitAppInputs } from '../components/applicationInputs/submitAppInputs';
+import { MenuItem, Select } from '@mui/material';
 //import SendIcon from '@mui/icons-material/Send';
 
 export default function ApplicationForm() {
@@ -150,6 +151,13 @@ export default function ApplicationForm() {
       inputs = courseInfoInputs;
       section = 'Course Details';
   }
+
+  function validateChange(val, func){
+    func(val)
+    if (val.match(/[a-z]*$/)){
+    }
+  }
+  
   
   return (
       <div className='pt5 pb5' >
@@ -163,27 +171,45 @@ export default function ApplicationForm() {
           <div className='flex justify-center pb2'>
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
               {inputs.map(input => {
-                if(input.disabled){ return (
-                  <div className='flex justify-between' key={input.id} >
+                let inputProps = {
+                  value: stateVars[input.field],
+                  onChange: (e) => {
+                    validateChange(e.target.value, stateFuncs[input.setFunction])
+                  }
+                }
+                if(input.type === 'select'){
+                  inputProps.variant = 'outlined'
+                  return (
+                    <div className='flex justify-between' key={input.id} > 
                     <div style={{width:300}}>
                       <p>{input.label}</p>
                     </div>
                     <div className='flex items-center'>
-                      <TextField  disabled variant='outlined' value={stateVars[input.field]} onChange={e => stateFuncs[input.setFunction](e.target.value)} />
+                      <Select sx={{ width:200,  height: 35 }} variant='standard' {...inputProps}>
+                        {input.dropDown.map((item, i) => {
+                          return (
+                            <MenuItem value={item} key={i}>{item}</MenuItem>
+                          )
+                        })
+                      }
+                      </Select>
                     </div>
                   </div>
-                )} else {
-                    return (
-                      <div className='flex justify-between' key={input.id} >
-                        <div style={{width:300}}>
-                          <p>{input.label}</p>
-                        </div>
-                        <div className='flex items-center'>
-                          <TextField  variant='outlined' value={stateVars[input.field]} onChange={e => stateFuncs[input.setFunction](e.target.value)} />
-                        </div>
+                  )
+                } else {
+                  if(input.disabled){inputProps.disabled = true}
+                  return (
+                    <div className='flex justify-between' key={input.id} > 
+                      <div style={{width:300}}>
+                        <p>{input.label}</p>
                       </div>
-                    )
-                 }
+                      <div className='flex items-center'>
+                        <TextField sx={{ width:200}} {...inputProps} />
+                      </div>
+                    </div>
+                  )           
+                }
+                     
               })}
               <div className='flex justify-center pt2'>
                 <Button variant='contained' type='submit' size='large'>SAVE</Button>

@@ -1,11 +1,12 @@
 export const courseInfoInputs = [
-  { field: 'agent', label: 'Agent', setFunction: 'setAgent', id: '0' },
+  { field: 'agent', label: 'Agent', setFunction: 'setAgent', id: '0', type : "select", dropDown: ['A003', 'A004'] },
   { field: 'id', label: 'ID', setFunction: 'setId', id: '1', disabled:true },
   {
     field: 'slcFunded',
     label: 'Will your fees be funded by the Student Loan Company / Student Finance England? ',
     setFunction: 'setSlcFunded',
-    id: '2'
+    id: '2',
+    type : "select", dropDown: ['Yes', 'No']
   },
   {
     field: 'residencyStatus',
@@ -23,7 +24,8 @@ export const courseInfoInputs = [
     field: 'programmeGroup',
     label: 'Programme Group ',
     setFunction: 'setProgrammeGroup',
-    id: '5'
+    id: '5',
+    type : "select", dropDown: ['POSTGRADUATE', 'UNDERGRADUATE']
   },
   {
     field: 'course',
@@ -113,7 +115,8 @@ export const courseInfoInputs = [
     field: 'gender',
     label: 'Gender ',
     setFunction: 'setGender',
-    id: '20'
+    id: '20',
+    type : "select", dropDown: ['Male', 'Female', 'Prefer not to say']
   },
   {
     field: 'email',
